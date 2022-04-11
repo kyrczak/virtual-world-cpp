@@ -1,5 +1,6 @@
 #pragma once
 #include "Swiat.h"
+class Swiat;
 
 class Organizm {
 private:
@@ -9,7 +10,7 @@ private:
 	int posY;
 	Swiat& swiat;
 public:
-	void akcja();
-	void kolizja();
-	void rysowanie();
+	virtual void akcja();
+	virtual void kolizja();
+	virtual void rysowanie();
 };
