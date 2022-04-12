@@ -14,4 +14,6 @@ public:
 	void rysujSwiat();
 	int getSzerkosc();
 	int getWysokosc();
+	std::vector <Organizm> setOrganizmy();
+	void dodajOrganizm(Organizm org);
 };

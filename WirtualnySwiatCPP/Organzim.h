@@ -6,6 +6,7 @@ class Organizm {
 private:
 	int sila;
 	int inicjatywa;
+	int wiek;
 	int posX;
 	int posY;
 	Swiat& swiat;

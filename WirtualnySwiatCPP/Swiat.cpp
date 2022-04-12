@@ -7,7 +7,7 @@ Swiat::Swiat(int szerokosc, int wysokosc) : szerokosc(szerokosc), wysokosc(wysok
 
 }
 void Swiat::wykonajTure() {
-
+	for(Organizm org :)
 }
 void Swiat::rysujSwiat() {
 	for (int i = 0; i < wysokosc; i++) {
@@ -21,5 +21,5 @@ int Swiat::getSzerkosc() {
 	return szerokosc;
 }
 int Swiat::getWysokosc() {
-	return wysokosc
+	return wysokosc;
 }
