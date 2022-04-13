@@ -3,15 +3,19 @@
 class Swiat;
 
 class Organizm {
-private:
+protected:
 	int sila;
 	int inicjatywa;
 	int wiek;
 	int posX;
 	int posY;
-	Swiat& swiat;
+	bool jestZywy;
+	char znak = '?';
+	Swiat* swiat;
 public:
-	virtual void akcja();
-	virtual void kolizja();
+	Organizm(Swiat* swt, int x, int y);
+	virtual void akcja() = 0;
+	virtual void kolizja() = 0;
 	virtual void rysowanie();
+	~Organizm();
 };
