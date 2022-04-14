@@ -142,6 +142,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Organizm.cpp" />
     <ClCompile Include="Swiat.cpp" />
+    <ClCompile Include="Zwierze.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Organzim.h" />

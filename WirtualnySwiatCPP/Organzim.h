@@ -9,13 +9,19 @@ protected:
 	int wiek;
 	int posX;
 	int posY;
-	bool jestZywy;
+	bool jestZywy = 1;
 	char znak = '?';
 	Swiat* swiat;
 public:
-	Organizm(Swiat* swt, int x, int y);
 	virtual void akcja() = 0;
 	virtual void kolizja() = 0;
 	virtual void rysowanie();
-	~Organizm();
+	int getSila();
+	int getInicjatywa();
+	int getPosX();
+	int getPosY();
+	bool getZywy();
+	void setZywy(bool jestZywy);
+	void setPosY(int y);
+	void setPosX(int x);
 };
