@@ -1,11 +1,19 @@
 #include <iostream>
 #include "Organzim.h"
 using namespace std;
-Organizm::Organizm(pair<int, int> pos, int sila, int inicjatywa, char znak, Swiat* swiat) : pos(pos), sila(sila), inicjatywa(inicjatywa), znak(znak), swiat(swiat) {
+bool Organizm::operator<(const Organizm& inny) const {
+    if (inicjatywa != inny.inicjatywa) {
+        return (inicjatywa > inny.inicjatywa);
+    }
+    else {
+        return (wiek > inny.wiek);
+    }
+}
+Organizm::Organizm(pair<int, int> pos, int sila, int inicjatywa, char znak, string nazwa, Swiat& swiat) : pos(pos), sila(sila), inicjatywa(inicjatywa), znak(znak), nazwa(nazwa), swiat(swiat) {
 
 }
 void Organizm::rysowanie() {
-    this->getSwiat()->getPlansza()[this->getPosX()][this->getPosY()] = this->getZnak();
+    this->swiat.getPlansza()[this->getPosX()][this->getPosY()] = this->getZnak();
 }
 int Organizm::getSila() {
     return this->sila;
@@ -28,6 +36,9 @@ bool Organizm::getZywy() {
 char Organizm::getZnak() {
     return this->znak;
 }
+string Organizm::getNazwa() {
+    return this->nazwa;
+}
 void Organizm::setPosX(int x) {
     this->pos.first = x;
 }
@@ -40,11 +51,8 @@ void Organizm::setZywy(bool jestZywy) {
 void Organizm::setWiek(int wiek) {
     this->wiek = wiek;
 }
-Swiat* Organizm::getSwiat() {
-    return this->swiat;
-}
 bool Organizm::czySieMiesci(pair <int, int> proposed) {
-    return (proposed.first >= 0 && proposed.second >= 0 && proposed.first < this->getSwiat()->getSzerkosc() && proposed.second < this->getSwiat()->getWysokosc());
+    return (proposed.first >= 0 && proposed.second >= 0 && proposed.first < this->swiat.getSzerkosc() && proposed.second < this->swiat.getWysokosc());
 }
 Organizm::~Organizm() {
 
