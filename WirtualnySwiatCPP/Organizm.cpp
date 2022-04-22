@@ -1,14 +1,6 @@
 #include <iostream>
 #include "Organzim.h"
 using namespace std;
-bool Organizm::operator<(const Organizm& inny) const {
-    if (inicjatywa != inny.inicjatywa) {
-        return (inicjatywa > inny.inicjatywa);
-    }
-    else {
-        return (wiek > inny.wiek);
-    }
-}
 Organizm::Organizm(pair<int, int> pos, int sila, int inicjatywa, char znak, string nazwa, Swiat& swiat) : pos(pos), sila(sila), inicjatywa(inicjatywa), znak(znak), nazwa(nazwa), swiat(swiat) {
 
 }
@@ -39,6 +31,9 @@ char Organizm::getZnak() {
 string Organizm::getNazwa() {
     return this->nazwa;
 }
+Swiat& Organizm::getSwiat() {
+    return this->swiat;
+}
 void Organizm::setPosX(int x) {
     this->pos.first = x;
 }
@@ -53,6 +48,13 @@ void Organizm::setWiek(int wiek) {
 }
 bool Organizm::czySieMiesci(pair <int, int> proposed) {
     return (proposed.first >= 0 && proposed.second >= 0 && proposed.first < this->swiat.getSzerkosc() && proposed.second < this->swiat.getWysokosc());
+}
+pair <int, int> Organizm::proponowanaPozycja(int kierunek) {
+    pair <int, int> ruchy[4] = {
+        {0,1},{0,-1},{1,0},{-1,0}
+    };
+    pair <int, int> pair = { (this->getPosX() + ruchy[kierunek].first),(this->getPosY() + ruchy[kierunek].second) };
+    return pair;
 }
 Organizm::~Organizm() {
 

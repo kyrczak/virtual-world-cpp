@@ -14,12 +14,12 @@ protected:
 	char znak;
 	std::string nazwa;
 	Swiat& swiat;
-	bool operator< (const Organizm& inny) const;
 public:
 	Organizm(std::pair<int,int> pos, int sila, int inicjatywa, char znak, std::string nazwa, Swiat& swiat);
 	virtual void akcja() = 0;
-	virtual void kolizja(Organizm* atakujacy) = 0;
+	virtual bool kolizja(Organizm* atakujacy) = 0;
 	virtual bool czyTenSamGatunek(Organizm* inny) = 0;
+	virtual std::pair <int, int> proponowanaPozycja(int kierunek);
 	void rysowanie();
 	int getSila();
 	int getInicjatywa();
@@ -28,6 +28,7 @@ public:
 	int getWiek();
 	bool getZywy();
 	char getZnak();
+	Swiat& getSwiat();
 	std::string getNazwa();
 	void setZywy(bool jestZywy);
 	void setPosY(int y);

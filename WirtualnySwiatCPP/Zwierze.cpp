@@ -1,10 +1,32 @@
 #include "Zwierze.h"
 #include <time.h>
 #include <stdlib.h>
+#include <random>
 
 void Zwierze::akcja() {	
-	int kierunek = rand() % 4;
-	bool ruch = true;	
+	this->ruch();
+	this->setWiek(this->getWiek() + 1);
+}
+bool Zwierze::kolizja(Organizm* atakujacy) {
+	return this->walka(atakujacy);
+}
+bool Zwierze::walka(Organizm* atakujacy) {
+	if (this->getSila() < atakujacy->getSila()) {
+		this->setZywy(false);
+		return true;
+	}
+	else if (this->getSila() == atakujacy->getSila()) {
+		this->setZywy(false);
+		return true;
+	}
+	else {
+		atakujacy->setZywy(false);
+		return false;
+	}
+}
+void Zwierze::ruch() {
+	uniform_int_distribution<int> dist(0, 3);
+	int kierunek = dist(this->getSwiat().getMt());
 	pair <int, int> proposedPosition = this->proponowanaPozycja(kierunek);
 	if (this->czySieMiesci(proposedPosition)) {
 		Organizm* org = this->swiat.getOrganizm(proposedPosition);
@@ -16,25 +38,12 @@ void Zwierze::akcja() {
 			//RozmnozSie
 		}
 		else {
-			org->kolizja(this);
+			if (org->kolizja(this)) {
+				this->setPosX(proposedPosition.first);
+				this->setPosY(proposedPosition.second);
+			}
 		}
 	}
-	this->setWiek(this->getWiek() + 1);
-}
-void Zwierze::kolizja(Organizm* atakujacy) {
-	if (this->getSila() < atakujacy->getSila() ){
-		this->setZywy(false);
-	}
-	else if (this->getSila() == atakujacy->getSila()) {
-		this->setZywy(false);
-	}
-}
-pair <int, int> Zwierze::proponowanaPozycja(int kierunek) {	
-	pair <int, int> ruchy[4] = {
-		{0,1},{0,-1},{1,0},{-1,0}
-	};
-	pair <int, int> pair = { (this->getPosX() + ruchy[kierunek].first),(this->getPosY() + ruchy[kierunek].second) };
-	return pair;
 }
 Zwierze::Zwierze(pair<int, int> pos, int sila, int inicjatywa, char znak,std::string nazwa, Swiat& swiat) : Organizm(pos, sila, inicjatywa, znak,nazwa , swiat) {
 

@@ -1,24 +1,34 @@
 #include <iostream>
 #include <stdlib.h>
 #include <algorithm>
+#include <random>
+#include <functional>
 #include "Swiat.h"
 
 using namespace std;
 
-Swiat::Swiat(int szerokosc, int wysokosc) : szerokosc(szerokosc), wysokosc(wysokosc) {
+Swiat::Swiat(int szerokosc, int wysokosc) : szerokosc(szerokosc), wysokosc(wysokosc), rd(), mt(rd()) {
 	this->plansza = new char*[wysokosc];
 	for (int i = 0; i < wysokosc; i++) {
 		this->plansza[i] = new char[szerokosc];
 	}
 }
+bool porownajOrganizmy(Organizm* lewy, Organizm* prawy) {
+	if (lewy->getInicjatywa() != prawy->getInicjatywa()) {
+		return (lewy->getInicjatywa() > prawy->getInicjatywa());
+	}
+	else {
+		return (lewy->getWiek() > prawy->getWiek());
+	}
+}
 void Swiat::wykonajTure() {
+	this->sortujOrganizmy();
+	this->rysujSwiat();
 	for (Organizm* org : this->getOrganizmy()) {
 		if (org->getZywy()) {
 			org->akcja();
 		}
 	}
-	this->rysujSwiat();
-	this->sortujOrganizmy();
 }
 void Swiat::rysujSwiat() {
 	this->wyczyscPlansze();
@@ -27,6 +37,7 @@ void Swiat::rysujSwiat() {
 			org->rysowanie();
 		}
 	}
+	this->projektInfo();
 	this->rysujPlansze();
 	this->rysujWektor();
 }
@@ -75,6 +86,11 @@ void Swiat::rysujWektor() {
 		cout << org->getNazwa() << ": Inicjatywa - " << org->getInicjatywa() << " Sila - " << org->getSila() << " Wiek - " << org->getWiek() << endl;
 	}
 }
+void Swiat::projektInfo() {
+	cout << IMIE << " " << NAZWISKO << " Index: " << INDEX << endl;
+	cout << "Wirtualny swiat C++" << endl;
+	cout << endl;
+}
 void Swiat::sortujOrganizmy() {
 	for (int i = 0; i < this->organizmy.size(); i++) {
 		if (!(this->organizmy[i]->getZywy())) {
@@ -82,10 +98,13 @@ void Swiat::sortujOrganizmy() {
 			this->organizmy.pop_back();
 		}
 	}
-	sort(this->organizmy.begin(), this->organizmy.end());
+	sort(this->organizmy.begin(), this->organizmy.end(), porownajOrganizmy);
 }
 char** Swiat::getPlansza() {
 	return this->plansza;
+}
+default_random_engine& Swiat::getMt() {
+	return this->mt;
 }
 Swiat::~Swiat() {
 	for (int i = 0; i < wysokosc; i++) {

@@ -1,5 +1,4 @@
 #pragma once
-#pragma once
 #include "Zwierze.h"
 
 #define SILAOWCY 4
