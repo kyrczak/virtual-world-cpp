@@ -11,6 +11,5 @@ public:
 	bool walka(Organizm* atakujacy);
 	virtual void ruch();
 	virtual bool czyTenSamGatunek(Organizm* inny) = 0;
-	void rozmnozSie(Organizm* partner);
 	~Zwierze();
 };

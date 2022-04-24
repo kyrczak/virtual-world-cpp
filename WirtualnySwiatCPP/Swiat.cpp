@@ -1,8 +1,8 @@
 #include "Swiat.h"
-
+#include <conio.h>
 using namespace std;
 
-Swiat::Swiat(int szerokosc, int wysokosc) : szerokosc(szerokosc), wysokosc(wysokosc), rd(), mt(rd()) {
+Swiat::Swiat(int szerokosc, int wysokosc) : szerokosc(szerokosc), wysokosc(wysokosc), rd(), mt(rd()), klawisz(0) {
 	this->plansza = new char*[wysokosc];
 	for (int i = 0; i < wysokosc; i++) {
 		this->plansza[i] = new char[szerokosc];
@@ -18,12 +18,12 @@ bool porownajOrganizmy(Organizm* lewy, Organizm* prawy) {
 }
 void Swiat::wykonajTure() {
 	this->sortujOrganizmy();
-	this->rysujSwiat();
 	for (Organizm* org : this->getOrganizmy()) {
 		if (org->getZywy()) {
 			org->akcja();
 		}
 	}
+	this->rysujSwiat();
 }
 void Swiat::rysujSwiat() {
 	this->wyczyscPlansze();
@@ -44,6 +44,12 @@ int Swiat::getWysokosc() {
 }
 void Swiat::setOrganizmy(vector <Organizm*> vec) {
 	this->organizmy = vec;
+}
+void Swiat::setKlawisz(int klawisz) {
+	this->klawisz = klawisz;
+}
+int Swiat::getKlawisz() {
+	return this->klawisz;
 }
 vector <Organizm*> Swiat::getOrganizmy() {
 	return this->organizmy; 
@@ -102,6 +108,35 @@ void Swiat::sortujOrganizmy() {
 		}
 	}
 	sort(this->organizmy.begin(), this->organizmy.end(), porownajOrganizmy);
+}
+void Swiat::pobierzKlawisz() {
+	unsigned char ch1 = _getch();
+	unsigned char ch2;
+	switch (ch1) {
+	case ARROWFUNC:
+		ch2 = _getch();
+		switch (ch2) {
+		case KEY_UP:
+			this->setKlawisz(UP);
+			break;
+		case KEY_DOWN:
+			this->setKlawisz(DOWN);
+			break;
+		case KEY_LEFT:
+			this->setKlawisz(LEFT);
+			break;
+		case KEY_RIGHT:
+			this->setKlawisz(RIGHT);
+			break;
+		default:
+			break;
+		}
+		break;
+	case KEY_F:
+		this->setKlawisz(KEY_F);
+	default:
+		break;
+	}
 }
 char** Swiat::getPlansza() {
 	return this->plansza;

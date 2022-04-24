@@ -48,6 +48,9 @@
     <ClCompile Include="Antylopa.cpp">
       <Filter>Pliki źródłowe\Zwierzęta</Filter>
     </ClCompile>
+    <ClCompile Include="Czlowiek.cpp">
+      <Filter>Pliki źródłowe\Zwierzęta</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Swiat.h">
@@ -75,6 +78,9 @@
       <Filter>Pliki nagłówkowe\Zwierzęta</Filter>
     </ClInclude>
     <ClInclude Include="Antylopa.h">
+      <Filter>Pliki nagłówkowe\Zwierzęta</Filter>
+    </ClInclude>
+    <ClInclude Include="Czlowiek.h">
       <Filter>Pliki nagłówkowe\Zwierzęta</Filter>
     </ClInclude>
   </ItemGroup>

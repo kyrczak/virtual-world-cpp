@@ -81,7 +81,7 @@ void Organizm::rozmnazajSie(Organizm* partner) {
 }
 pair <int, int> Organizm::proponowanaPozycja(int kierunek) {
     pair <int, int> ruchy[4] = {
-        {0,1},{0,-1},{1,0},{-1,0}
+        {-1,0},{1,0},{0,-1},{0,1}
     };
     pair <int, int> pair = { (this->getPosX() + ruchy[kierunek].first),(this->getPosY() + ruchy[kierunek].second) };
     return pair;
