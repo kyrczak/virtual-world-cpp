@@ -11,5 +11,6 @@ public:
 	Lis(pair<int, int> pos, Swiat& swiat);
 	void ruch() override;
 	bool czyTenSamGatunek(Organizm* inny) override;
+	void utworzOrganizm(pair<int, int> pole, Swiat& swiat) override;
 	~Lis();
 };

@@ -1,4 +1,5 @@
 #include <iostream>
+#include <random>
 #include "Organzim.h"
 using namespace std;
 Organizm::Organizm(pair<int, int> pos, int sila, int inicjatywa, char znak, string nazwa, Swiat& swiat) : pos(pos), sila(sila), inicjatywa(inicjatywa), znak(znak), nazwa(nazwa), swiat(swiat) {
@@ -46,8 +47,37 @@ void Organizm::setZywy(bool jestZywy) {
 void Organizm::setWiek(int wiek) {
     this->wiek = wiek;
 }
+vector<pair<int, int>> Organizm::wolnePola() {
+    vector<pair<int, int>> wolnePozycje;
+    pair <int, int> ruchy[4] = {
+        {this->getPosX(),this->getPosY()+1},{this->getPosX(),this->getPosY()-1},{this->getPosX()+1,this->getPosY()},{this->getPosX()-1,this->getPosY()}
+    };
+    for (int i = 0; i < 4; i++) {
+        if (this->getSwiat().getOrganizm(ruchy[i]) == nullptr && this->czySieMiesci(ruchy[i])) {
+            wolnePozycje.push_back(ruchy[i]);
+        }
+    }
+    return wolnePozycje;
+}
+pair <int, int> Organizm::wybierzWolnePole(vector<pair<int, int>> wektorPol) {
+    if (!wektorPol.empty()) {
+        uniform_int_distribution<int> dist(0, wektorPol.size()-1);
+        int index = dist(this->getSwiat().getMt());
+        return wektorPol[index];
+    }
+    else {
+        return pair<int, int> {ERRORPOLE, ERRORPOLE};
+    }
+}
 bool Organizm::czySieMiesci(pair <int, int> proposed) {
     return (proposed.first >= 0 && proposed.second >= 0 && proposed.first < this->swiat.getSzerkosc() && proposed.second < this->swiat.getWysokosc());
+}
+void Organizm::rozmnazajSie(Organizm* partner) {
+    vector<pair<int, int>> wolnePola = this->wolnePola();
+    pair<int, int> wskPole = this->wybierzWolnePole(wolnePola);
+    if (wskPole != pair<int, int> {ERRORPOLE, ERRORPOLE}) {
+        this->utworzOrganizm(wskPole, this->getSwiat());
+    }
 }
 pair <int, int> Organizm::proponowanaPozycja(int kierunek) {
     pair <int, int> ruchy[4] = {

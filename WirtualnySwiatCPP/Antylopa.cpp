@@ -25,15 +25,30 @@ void Antylopa::ruch() {
 			this->setPosY(proposedPosition.second);
 		}
 		else if (this->czyTenSamGatunek(org)) {
-			//RozmnozSie
+			this->rozmnazajSie(org);
 		}
 		else {
 			if (org->kolizja(this)) {
+				this->getSwiat().dodajAktywnosc("Zwierze " + org->getNazwa() + " zostalo zabite przez " + this->getNazwa());
 				this->setPosX(proposedPosition.first);
 				this->setPosY(proposedPosition.second);
 			}
 		}
 	}
+}
+bool Antylopa::kolizja(Organizm* atakujacy) {
+	uniform_int_distribution<int> dist(0, 1);
+	bool atak = dist(this->getSwiat().getMt());
+	if (atak) {
+		return this->walka(atakujacy);
+	}
+	else {
+		this->getSwiat().dodajAktywnosc("Antylopa ucieka od ataku");
+		return false;
+	}
+}
+void Antylopa::utworzOrganizm(std::pair<int, int> pole, Swiat& swiat) {
+	this->getSwiat().dodajOrganizm(new Antylopa(pole, swiat));
 }
 Antylopa::~Antylopa() {
 

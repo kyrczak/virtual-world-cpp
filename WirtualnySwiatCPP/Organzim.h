@@ -2,6 +2,11 @@
 #include "Swiat.h"
 #include <string>
 #include <cstdlib>
+#include <iostream>
+#include <algorithm>
+#include <random>
+#include <functional>
+#define ERRORPOLE -99
 class Swiat;
 
 class Organizm {
@@ -19,6 +24,7 @@ public:
 	virtual void akcja() = 0;
 	virtual bool kolizja(Organizm* atakujacy) = 0;
 	virtual bool czyTenSamGatunek(Organizm* inny) = 0;
+	virtual void utworzOrganizm(std::pair<int, int> pole, Swiat& swiat) = 0;
 	virtual std::pair <int, int> proponowanaPozycja(int kierunek);
 	void rysowanie();
 	int getSila();
@@ -27,9 +33,12 @@ public:
 	int getPosY();
 	int getWiek();
 	bool getZywy();
+	void rozmnazajSie(Organizm* partner);
 	char getZnak();
 	Swiat& getSwiat();
 	std::string getNazwa();
+	std::vector <std::pair<int, int>> wolnePola();
+	std::pair <int, int> wybierzWolnePole(std::vector<std::pair<int,int>> wektorPol);
 	void setZywy(bool jestZywy);
 	void setPosY(int y);
 	void setPosX(int x);

@@ -17,17 +17,21 @@ void Lis::ruch() {
 			this->setPosY(proposedPosition.second);
 		}
 		else if (this->czyTenSamGatunek(org)) {
-			//RozmnozSie
+			this->rozmnazajSie(org);
 		}
 		else {
 			if (org->getSila() < this->getSila()) {
 				if (org->kolizja(this)) {
+					this->getSwiat().dodajAktywnosc("Zwierze " + org->getNazwa() + " zostalo zabite przez " + this->getNazwa());
 					this->setPosX(proposedPosition.first);
 					this->setPosY(proposedPosition.second);
 				}
 			}
 		}
 	}
+}
+void Lis::utworzOrganizm(std::pair<int, int> pole, Swiat& swiat) {
+	this->getSwiat().dodajOrganizm(new Lis(pole, swiat));
 }
 Lis::~Lis() {
 

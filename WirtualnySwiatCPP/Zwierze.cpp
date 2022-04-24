@@ -13,6 +13,7 @@ bool Zwierze::kolizja(Organizm* atakujacy) {
 bool Zwierze::walka(Organizm* atakujacy) {
 	if (this->getSila() < atakujacy->getSila()) {
 		this->setZywy(false);
+
 		return true;
 	}
 	else if (this->getSila() == atakujacy->getSila()) {
@@ -35,10 +36,11 @@ void Zwierze::ruch() {
 			this->setPosY(proposedPosition.second);
 		}
 		else if (this->czyTenSamGatunek(org)) {
-			//RozmnozSie
+			this->rozmnazajSie(org);
 		}
 		else {
 			if (org->kolizja(this)) {
+				this->getSwiat().dodajAktywnosc("Zwierze " + org->getNazwa() + " zostalo zabite przez " + this->getNazwa());
 				this->setPosX(proposedPosition.first);
 				this->setPosY(proposedPosition.second);
 			}

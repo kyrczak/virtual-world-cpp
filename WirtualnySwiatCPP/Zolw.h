@@ -12,5 +12,6 @@ public:
 	void ruch() override;
 	bool kolizja(Organizm* atakujacy) override;
 	bool czyTenSamGatunek(Organizm* inny) override;
+	void utworzOrganizm(pair<int, int> pole, Swiat& swiat) override;
 	~Zolw();
 };

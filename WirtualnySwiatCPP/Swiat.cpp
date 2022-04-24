@@ -1,8 +1,3 @@
-#include <iostream>
-#include <stdlib.h>
-#include <algorithm>
-#include <random>
-#include <functional>
 #include "Swiat.h"
 
 using namespace std;
@@ -53,6 +48,9 @@ void Swiat::setOrganizmy(vector <Organizm*> vec) {
 vector <Organizm*> Swiat::getOrganizmy() {
 	return this->organizmy; 
 }
+vector <string> Swiat::getAktywnosci() {
+	return this->aktywnosci;
+}
 Organizm* Swiat::getOrganizm(pair <int, int> pozycja) {
 	Organizm* inny = nullptr;
 	for (Organizm* org : this->getOrganizmy()) {
@@ -82,9 +80,14 @@ void Swiat::rysujPlansze() {
 	cout << endl;
 }
 void Swiat::rysujWektor() {
+	for (string str : this->getAktywnosci()) {
+		cout << str << endl;
+	}
+	cout << endl;
 	for (Organizm* org : this->getOrganizmy()) {
 		cout << org->getNazwa() << ": Inicjatywa - " << org->getInicjatywa() << " Sila - " << org->getSila() << " Wiek - " << org->getWiek() << endl;
 	}
+	this->aktywnosci.clear();
 }
 void Swiat::projektInfo() {
 	cout << IMIE << " " << NAZWISKO << " Index: " << INDEX << endl;
@@ -105,6 +108,9 @@ char** Swiat::getPlansza() {
 }
 default_random_engine& Swiat::getMt() {
 	return this->mt;
+}
+void Swiat::dodajAktywnosc(string aktywnosc) {
+	this->aktywnosci.push_back(aktywnosc);
 }
 Swiat::~Swiat() {
 	for (int i = 0; i < wysokosc; i++) {

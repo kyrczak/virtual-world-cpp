@@ -10,5 +10,6 @@ class Wilk : public Zwierze {
 public:
 	Wilk(pair<int, int> pos, Swiat& swiat);
 	bool czyTenSamGatunek(Organizm* inny) override;
+	void utworzOrganizm(pair<int, int> pole, Swiat& swiat) override;
 	~Wilk();
 };

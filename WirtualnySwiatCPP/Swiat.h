@@ -1,6 +1,11 @@
 #pragma once
 #include <vector>
 #include <random>
+#include <iostream>
+#include <string>
+#include <cstdlib>
+#include <algorithm>
+#include <functional>
 #include "Organzim.h"
 #define IMIE "Patryk"
 #define NAZWISKO "Korczak"
@@ -14,6 +19,7 @@ private:
 	int szerokosc;
 	int wysokosc;
 	vector <Organizm*> organizmy;
+	vector <string> aktywnosci;
 	char** plansza;
 	random_device rd;
 	default_random_engine mt;
@@ -25,6 +31,7 @@ public:
 	int getWysokosc();
 	void setOrganizmy(vector <Organizm*> org);
 	vector <Organizm*> getOrganizmy();
+	vector <string> getAktywnosci();
 	Organizm* getOrganizm(pair <int,int> pozycja);
 	char** getPlansza();
 	default_random_engine& getMt();
@@ -34,5 +41,6 @@ public:
 	void sortujOrganizmy();
 	void rysujWektor();
 	void projektInfo();
+	void dodajAktywnosc(string aktywnosc);
 	~Swiat();
 };

@@ -19,10 +19,11 @@ void Zolw::ruch() {
 				this->setPosY(proposedPosition.second);
 			}
 			else if (this->czyTenSamGatunek(org)) {
-				//RozmnozSie
+				this->rozmnazajSie(org);
 			}
 			else {
 				if (org->kolizja(this)) {
+					this->getSwiat().dodajAktywnosc("Zwierze " + org->getNazwa() + " zostalo zabite przez " + this->getNazwa());
 					this->setPosX(proposedPosition.first);
 					this->setPosY(proposedPosition.second);
 				}
@@ -32,11 +33,15 @@ void Zolw::ruch() {
 }
 bool Zolw::kolizja(Organizm* atakujacy) {
 	if (atakujacy->getSila() < 5) {
+		this->getSwiat().dodajAktywnosc("Zolw odbil atak " + atakujacy->getNazwa());
 		return false;
 	}
 	else {
 		return (this->walka(atakujacy));
 	}
+}
+void Zolw::utworzOrganizm(std::pair<int, int> pole, Swiat& swiat) {
+	this->getSwiat().dodajOrganizm(new Zolw(pole, swiat));
 }
 Zolw::~Zolw() {
 
