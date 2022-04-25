@@ -24,6 +24,7 @@ void Swiat::wykonajTure() {
 		}
 	}
 	this->rysujSwiat();
+	this->zwiekszTura();
 }
 void Swiat::rysujSwiat() {
 	this->wyczyscPlansze();
@@ -50,6 +51,12 @@ void Swiat::setKlawisz(int klawisz) {
 }
 int Swiat::getKlawisz() {
 	return this->klawisz;
+}
+int Swiat::getTura() {
+	return this->ktoraTura;
+}
+void Swiat::zwiekszTura() {
+	this->ktoraTura++;
 }
 vector <Organizm*> Swiat::getOrganizmy() {
 	return this->organizmy; 
@@ -90,14 +97,14 @@ void Swiat::rysujWektor() {
 		cout << str << endl;
 	}
 	cout << endl;
-	for (Organizm* org : this->getOrganizmy()) {
+	/*for (Organizm* org : this->getOrganizmy()) {
 		cout << org->getNazwa() << ": Inicjatywa - " << org->getInicjatywa() << " Sila - " << org->getSila() << " Wiek - " << org->getWiek() << endl;
-	}
+	}*/
 	this->aktywnosci.clear();
 }
 void Swiat::projektInfo() {
 	cout << IMIE << " " << NAZWISKO << " Index: " << INDEX << endl;
-	cout << "Wirtualny swiat C++" << endl;
+	cout << "Wirtualny swiat C++	"<<"Tura: "<<this->getTura()<< endl;
 	cout << endl;
 }
 void Swiat::sortujOrganizmy() {
@@ -134,6 +141,8 @@ void Swiat::pobierzKlawisz() {
 		break;
 	case KEY_F:
 		this->setKlawisz(KEY_F);
+	case 'q':
+		exit(0);
 	default:
 		break;
 	}

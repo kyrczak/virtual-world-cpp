@@ -34,6 +34,7 @@ private:
 	random_device rd;
 	default_random_engine mt;
 	int klawisz;
+	int ktoraTura = 0;
 public:
 	Swiat(int szerokosc, int wysokosc);
 	void wykonajTure();
@@ -56,5 +57,7 @@ public:
 	void projektInfo();
 	void pobierzKlawisz();
 	void dodajAktywnosc(string aktywnosc);
+	int getTura();
+	void zwiekszTura();
 	~Swiat();
 };
