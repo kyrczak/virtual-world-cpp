@@ -36,11 +36,11 @@ void Zwierze::ruch() {
 			this->setPosY(proposedPosition.second);
 		}
 		else if (this->czyTenSamGatunek(org)) {
-			this->rozmnazajSie(org);
+			this->rozmnazajSie();
 		}
 		else {
 			if (org->kolizja(this)) {
-				this->getSwiat().dodajAktywnosc("Zwierze " + org->getNazwa() + " zostalo zabite przez " + this->getNazwa());
+				this->getSwiat().dodajAktywnosc("Organizm " + org->getNazwa() + " zostal zabity przez " + this->getNazwa());
 				this->setPosX(proposedPosition.first);
 				this->setPosY(proposedPosition.second);
 			}

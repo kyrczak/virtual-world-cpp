@@ -141,8 +141,10 @@ void Swiat::pobierzKlawisz() {
 		break;
 	case KEY_F:
 		this->setKlawisz(KEY_F);
+		break;
 	case 'q':
 		exit(0);
+		break;
 	default:
 		break;
 	}

@@ -33,7 +33,7 @@ public:
 	int getPosY();
 	int getWiek();
 	bool getZywy();
-	void rozmnazajSie(Organizm* partner);
+	void rozmnazajSie();
 	char getZnak();
 	Swiat& getSwiat();
 	std::string getNazwa();
@@ -43,6 +43,7 @@ public:
 	void setPosY(int y);
 	void setPosX(int x);
 	void setWiek(int wiek);
+	void setSila(int sila);
 	bool czySieMiesci(std::pair <int, int> proposed);
 	~Organizm();
 };

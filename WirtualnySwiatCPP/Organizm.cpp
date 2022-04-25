@@ -6,7 +6,7 @@ Organizm::Organizm(pair<int, int> pos, int sila, int inicjatywa, char znak, stri
 
 }
 void Organizm::rysowanie() {
-    this->swiat.getPlansza()[this->getPosX()][this->getPosY()] = this->getZnak();
+    this->swiat.getPlansza()[this->getPosY()][this->getPosX()] = this->getZnak();
 }
 int Organizm::getSila() {
     return this->sila;
@@ -47,6 +47,9 @@ void Organizm::setZywy(bool jestZywy) {
 void Organizm::setWiek(int wiek) {
     this->wiek = wiek;
 }
+void Organizm::setSila(int sila) {
+    this->sila = sila;
+}
 vector<pair<int, int>> Organizm::wolnePola() {
     vector<pair<int, int>> wolnePozycje;
     pair <int, int> ruchy[4] = {
@@ -72,7 +75,7 @@ pair <int, int> Organizm::wybierzWolnePole(vector<pair<int, int>> wektorPol) {
 bool Organizm::czySieMiesci(pair <int, int> proposed) {
     return (proposed.first >= 0 && proposed.second >= 0 && proposed.first < this->swiat.getSzerkosc() && proposed.second < this->swiat.getWysokosc());
 }
-void Organizm::rozmnazajSie(Organizm* partner) {
+void Organizm::rozmnazajSie() {
     vector<pair<int, int>> wolnePola = this->wolnePola();
     pair<int, int> wskPole = this->wybierzWolnePole(wolnePola);
     if (wskPole != pair<int, int> {ERRORPOLE, ERRORPOLE}) {
@@ -81,7 +84,7 @@ void Organizm::rozmnazajSie(Organizm* partner) {
 }
 pair <int, int> Organizm::proponowanaPozycja(int kierunek) {
     pair <int, int> ruchy[4] = {
-        {-1,0},{1,0},{0,-1},{0,1}
+        {0,-1},{0,1},{-1,0},{1,0}
     };
     pair <int, int> pair = { (this->getPosX() + ruchy[kierunek].first),(this->getPosY() + ruchy[kierunek].second) };
     return pair;

@@ -1,0 +1,16 @@
+#pragma once
+#include <iostream>
+#include <Windows.h>
+#include <time.h>
+#include "Swiat.h"
+#include "Wilk.h"
+#include "Owca.h"
+#include "Zolw.h"
+#include "Lis.h"
+#include "Antylopa.h"
+#include "Czlowiek.h"
+#include "Trawa.h"
+#include "Mlecz.h"
+#include "Guarana.h"
+#include "WilczeJagody.h"
+#include "BarszczSosnowskiego.h"

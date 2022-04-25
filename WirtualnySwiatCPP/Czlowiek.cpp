@@ -15,7 +15,7 @@ void Czlowiek::ruch() {
 			}
 			else {
 				if (org->kolizja(this)) {
-					this->getSwiat().dodajAktywnosc("Zwierze " + org->getNazwa() + " zostalo zabite przez " + this->getNazwa());
+					this->getSwiat().dodajAktywnosc("Organizm " + org->getNazwa() + " zostalo zabite przez " + this->getNazwa());
 					this->setPosX(proposedPosition.first);
 					this->setPosY(proposedPosition.second);
 				}
